@@ -1,0 +1,116 @@
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useUser } from '../context/UserContext'
+import { holdemStudy } from '../data/holdem'
+import { markStudyDone } from '../lib/progress'
+
+const STUDY_DATA = {
+  holdem: holdemStudy,
+}
+
+export default function StudyPage() {
+  const { gameId } = useParams()
+  const navigate = useNavigate()
+  const { user } = useUser()
+  const [activeSection, setActiveSection] = useState(0)
+
+  const data = STUDY_DATA[gameId]
+
+  useEffect(() => {
+    setActiveSection(0)
+  }, [gameId])
+
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <p className="text-slate-400">このゲームはまだ準備中です</p>
+      </div>
+    )
+  }
+
+  const section = data.sections[activeSection]
+  const isLast = activeSection === data.sections.length - 1
+
+  const handleNext = () => {
+    if (isLast) {
+      markStudyDone(user.name, gameId)
+      navigate(`/quiz/${gameId}`)
+    } else {
+      setActiveSection(prev => prev + 1)
+      window.scrollTo(0, 0)
+    }
+  }
+
+  return (
+    <div className="max-w-lg mx-auto px-4 py-6">
+      {/* 戻るボタン */}
+      <button
+        onClick={() => navigate('/study')}
+        className="flex items-center gap-1 text-sm text-slate-400 hover:text-white mb-4 transition-colors"
+      >
+        ← 一覧に戻る
+      </button>
+
+      {/* タイトル */}
+      <h2 className="text-xl font-bold text-white mb-1">{data.name}</h2>
+
+      {/* 進捗バー */}
+      <div className="flex items-center gap-2 mb-6">
+        <div className="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-emerald-500 rounded-full transition-all duration-300"
+            style={{ width: `${((activeSection + 1) / data.sections.length) * 100}%` }}
+          />
+        </div>
+        <span className="text-xs text-slate-400 flex-shrink-0">
+          {activeSection + 1} / {data.sections.length}
+        </span>
+      </div>
+
+      {/* セクションナビ（横スクロール） */}
+      <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none">
+        {data.sections.map((s, i) => (
+          <button
+            key={s.id}
+            onClick={() => setActiveSection(i)}
+            className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              i === activeSection
+                ? 'bg-emerald-500 text-white'
+                : i < activeSection
+                  ? 'bg-slate-700 text-slate-300'
+                  : 'bg-slate-800 text-slate-500'
+            }`}
+          >
+            {s.title}
+          </button>
+        ))}
+      </div>
+
+      {/* コンテンツカード */}
+      <div className="bg-slate-800 rounded-2xl p-5 mb-6 border border-slate-700">
+        <h3 className="text-lg font-bold text-emerald-400 mb-4">{section.title}</h3>
+        <div className="text-slate-200 text-sm leading-relaxed whitespace-pre-line">
+          {section.content}
+        </div>
+      </div>
+
+      {/* ナビボタン */}
+      <div className="flex gap-3">
+        {activeSection > 0 && (
+          <button
+            onClick={() => { setActiveSection(prev => prev - 1); window.scrollTo(0, 0) }}
+            className="flex-1 py-3 rounded-xl border border-slate-700 text-slate-300 font-medium hover:bg-slate-800 transition-colors"
+          >
+            ← 前へ
+          </button>
+        )}
+        <button
+          onClick={handleNext}
+          className="flex-1 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold transition-colors active:scale-95"
+        >
+          {isLast ? 'クイズに挑戦！ →' : '次へ →'}
+        </button>
+      </div>
+    </div>
+  )
+}
