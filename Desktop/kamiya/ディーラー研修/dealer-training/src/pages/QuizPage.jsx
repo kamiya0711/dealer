@@ -9,9 +9,9 @@ const QUIZ_DATA = {
 }
 
 const LEVEL_META = {
-  beginner:     { label: '初級', color: 'text-emerald-400', bg: 'bg-emerald-500', bgLight: 'bg-emerald-500/10', border: 'border-emerald-500/30' },
-  intermediate: { label: '中級', color: 'text-yellow-400',  bg: 'bg-yellow-500',  bgLight: 'bg-yellow-500/10',  border: 'border-yellow-500/30'  },
-  advanced:     { label: '上級', color: 'text-red-400',      bg: 'bg-red-500',      bgLight: 'bg-red-500/10',      border: 'border-red-500/30'      },
+  beginner:     { label: '初級', color: 'text-emerald-600', bg: 'bg-emerald-500', bgLight: 'bg-emerald-100', border: 'border-emerald-300', textLight: 'text-emerald-700' },
+  intermediate: { label: '中級', color: 'text-amber-600',   bg: 'bg-amber-500',   bgLight: 'bg-amber-100',   border: 'border-amber-300',   textLight: 'text-amber-700'   },
+  advanced:     { label: '上級', color: 'text-red-600',      bg: 'bg-red-500',      bgLight: 'bg-red-100',      border: 'border-red-300',      textLight: 'text-red-700'      },
 }
 
 export default function QuizPage() {
@@ -39,7 +39,7 @@ export default function QuizPage() {
   if (!quiz || !quiz.levels[level]) {
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-slate-400">このクイズはまだ準備中です</p>
+        <p className="text-slate-500">このクイズはまだ準備中です</p>
       </div>
     )
   }
@@ -81,20 +81,20 @@ export default function QuizPage() {
         <div className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-3 ${meta.bgLight} ${meta.color}`}>
           {meta.label}
         </div>
-        <h2 className="text-2xl font-bold text-white mb-4">
+        <h2 className="text-2xl font-bold text-slate-800 mb-4">
           {pct >= 90 ? '優秀！' : pct >= 70 ? 'もう少し！' : '再挑戦しよう'}
         </h2>
 
         <div className="my-4">
-          <div className="text-5xl font-black text-white">
+          <div className="text-5xl font-black text-slate-800">
             {finalScore}<span className="text-xl text-slate-400">/{total}</span>
           </div>
           <div className={`text-lg font-bold mt-1 ${pass ? meta.color : 'text-slate-400'}`}>{pct}%</div>
-          {pass && <div className="text-sm text-slate-400 mt-1">合格！（80%以上）</div>}
+          {pass && <div className="text-sm text-slate-500 mt-1">合格！（80%以上）</div>}
         </div>
 
         {/* 正誤詳細 */}
-        <div className="bg-slate-800 rounded-2xl p-4 mb-6 text-left space-y-3">
+        <div className="bg-white rounded-2xl p-4 mb-6 text-left space-y-3 border border-slate-200 shadow-sm">
           {questions.map((q, i) => (
             <div key={q.id} className="flex gap-2 items-start text-sm">
               <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
@@ -103,9 +103,9 @@ export default function QuizPage() {
                 {results[i].correct ? '○' : '×'}
               </span>
               <div>
-                <p className={results[i].correct ? 'text-slate-300' : 'text-slate-400'}>{q.question}</p>
+                <p className={results[i].correct ? 'text-slate-700' : 'text-slate-500'}>{q.question}</p>
                 {!results[i].correct && (
-                  <p className="text-slate-500 text-xs mt-1">💡 {q.explanation}</p>
+                  <p className="text-slate-400 text-xs mt-1">💡 {q.explanation}</p>
                 )}
               </div>
             </div>
@@ -115,13 +115,13 @@ export default function QuizPage() {
         <div className="flex gap-3">
           <button
             onClick={() => { setQuestions(pickQuestions()); setCurrent(0); setSelected(null); setAnswered(false); setResults([]); setFinished(false) }}
-            className="flex-1 py-3 rounded-xl border border-slate-700 text-slate-300 font-medium hover:bg-slate-800 transition-colors"
+            className="flex-1 py-3 rounded-xl border border-slate-200 text-slate-600 font-medium hover:bg-slate-100 transition-colors shadow-sm"
           >
             もう一度
           </button>
           <button
             onClick={() => navigate('/quiz')}
-            className={`flex-1 py-3 rounded-xl ${meta.bg} text-white font-bold transition-colors hover:opacity-90`}
+            className={`flex-1 py-3 rounded-xl ${meta.bg} text-white font-bold transition-colors hover:opacity-90 shadow-md`}
           >
             クイズ一覧へ
           </button>
@@ -138,7 +138,7 @@ export default function QuizPage() {
       <div className="flex items-center gap-3 mb-4">
         <button
           onClick={() => navigate('/quiz')}
-          className="text-sm text-slate-400 hover:text-white transition-colors"
+          className="text-sm text-slate-500 hover:text-slate-800 transition-colors"
         >
           ← 一覧に戻る
         </button>
@@ -149,24 +149,24 @@ export default function QuizPage() {
 
       {/* 進捗バー */}
       <div className="flex items-center gap-2 mb-6">
-        <div className="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+        <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
           <div
             className={`h-full rounded-full transition-all duration-300 ${meta.bg}`}
             style={{ width: `${(current / total) * 100}%` }}
           />
         </div>
-        <span className="text-xs text-slate-400 flex-shrink-0">{current + 1} / {total}</span>
+        <span className="text-xs text-slate-500 flex-shrink-0">{current + 1} / {total}</span>
       </div>
 
       {/* 問題カード */}
-      <div className="bg-slate-800 rounded-2xl p-5 mb-5 border border-slate-700">
+      <div className="bg-white rounded-2xl p-5 mb-5 border border-slate-200 shadow-sm">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Q{current + 1}</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-slate-700 text-slate-400">
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Q{current + 1}</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
             {q.type === 'truefalse' ? '○ × 問題' : '選択問題'}
           </span>
           {q.situation && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-600">
               状況判断
             </span>
           )}
@@ -174,13 +174,13 @@ export default function QuizPage() {
 
         {/* 状況説明 */}
         {q.situation && (
-          <div className="mb-4 p-3 rounded-xl bg-slate-700/60 border-l-2 border-blue-400">
-            <p className="text-xs font-semibold text-blue-400 mb-1">【状況】</p>
-            <p className="text-slate-200 text-sm leading-relaxed">{q.situation}</p>
+          <div className="mb-4 p-3 rounded-xl bg-blue-50 border-l-2 border-blue-400">
+            <p className="text-xs font-semibold text-blue-600 mb-1">【状況】</p>
+            <p className="text-slate-700 text-sm leading-relaxed">{q.situation}</p>
           </div>
         )}
 
-        <p className="text-white font-medium leading-relaxed">{q.question}</p>
+        <p className="text-slate-800 font-medium leading-relaxed">{q.question}</p>
       </div>
 
       {/* 選択肢 */}
@@ -197,12 +197,12 @@ export default function QuizPage() {
                 onClick={() => handleAnswer(val)}
                 className={`py-5 rounded-2xl text-lg font-bold transition-all active:scale-95 border-2 ${
                   !answered
-                    ? 'border-slate-700 bg-slate-800 text-white hover:border-slate-500'
+                    ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 shadow-sm'
                     : isAnswer
                       ? 'border-emerald-500 bg-emerald-500 text-white'
                       : isWrong
                         ? 'border-red-500 bg-red-500 text-white'
-                        : 'border-slate-700 bg-slate-800 text-slate-500'
+                        : 'border-slate-200 bg-slate-50 text-slate-400'
                 }`}
               >
                 {label}
@@ -222,12 +222,12 @@ export default function QuizPage() {
                 onClick={() => handleAnswer(i)}
                 className={`w-full text-left px-4 py-3 rounded-xl transition-all border-2 ${
                   !answered
-                    ? 'border-slate-700 bg-slate-800 text-white hover:border-slate-500'
+                    ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 shadow-sm'
                     : isAnswer
-                      ? 'border-emerald-500 bg-emerald-500/20 text-emerald-300'
+                      ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
                       : isWrong
-                        ? 'border-red-500 bg-red-500/20 text-red-300'
-                        : 'border-slate-700 bg-slate-800 text-slate-500'
+                        ? 'border-red-500 bg-red-50 text-red-700'
+                        : 'border-slate-200 bg-slate-50 text-slate-400'
                 }`}
               >
                 <span className="font-medium">{String.fromCharCode(65 + i)}. </span>
@@ -241,19 +241,19 @@ export default function QuizPage() {
       {/* 解説 */}
       {answered && (
         <div className={`rounded-2xl p-4 mb-5 border ${
-          isCorrect ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-red-500/10 border-red-500/30'
+          isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200'
         }`}>
-          <div className={`font-bold mb-1 ${isCorrect ? 'text-emerald-400' : 'text-red-400'}`}>
+          <div className={`font-bold mb-1 ${isCorrect ? 'text-emerald-600' : 'text-red-600'}`}>
             {isCorrect ? '✓ 正解！' : '✗ 不正解'}
           </div>
-          <p className="text-slate-300 text-sm leading-relaxed">{q.explanation}</p>
+          <p className="text-slate-600 text-sm leading-relaxed">{q.explanation}</p>
         </div>
       )}
 
       {answered && (
         <button
           onClick={handleNext}
-          className={`w-full py-3 rounded-xl ${meta.bg} text-white font-bold transition-colors hover:opacity-90 active:scale-95`}
+          className={`w-full py-3 rounded-xl ${meta.bg} text-white font-bold transition-colors hover:opacity-90 active:scale-95 shadow-md`}
         >
           {current + 1 >= total ? '結果を見る' : '次の問題へ →'}
         </button>

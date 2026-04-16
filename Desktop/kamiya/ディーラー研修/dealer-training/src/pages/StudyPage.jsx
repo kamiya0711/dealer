@@ -23,7 +23,7 @@ export default function StudyPage() {
   if (!data) {
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-slate-400">このゲームはまだ準備中です</p>
+        <p className="text-slate-500">このゲームはまだ準備中です</p>
       </div>
     )
   }
@@ -46,23 +46,23 @@ export default function StudyPage() {
       {/* 戻るボタン */}
       <button
         onClick={() => navigate('/study')}
-        className="flex items-center gap-1 text-sm text-slate-400 hover:text-white mb-4 transition-colors"
+        className="flex items-center gap-1 text-sm text-slate-500 hover:text-slate-800 mb-4 transition-colors"
       >
         ← 一覧に戻る
       </button>
 
       {/* タイトル */}
-      <h2 className="text-xl font-bold text-white mb-1">{data.name}</h2>
+      <h2 className="text-xl font-bold text-slate-800 mb-1">{data.name}</h2>
 
       {/* 進捗バー */}
       <div className="flex items-center gap-2 mb-6">
-        <div className="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+        <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
           <div
             className="h-full bg-emerald-500 rounded-full transition-all duration-300"
             style={{ width: `${((activeSection + 1) / data.sections.length) * 100}%` }}
           />
         </div>
-        <span className="text-xs text-slate-400 flex-shrink-0">
+        <span className="text-xs text-slate-500 flex-shrink-0">
           {activeSection + 1} / {data.sections.length}
         </span>
       </div>
@@ -77,8 +77,8 @@ export default function StudyPage() {
               i === activeSection
                 ? 'bg-emerald-500 text-white'
                 : i < activeSection
-                  ? 'bg-slate-700 text-slate-300'
-                  : 'bg-slate-800 text-slate-500'
+                  ? 'bg-emerald-100 text-emerald-700'
+                  : 'bg-slate-200 text-slate-500'
             }`}
           >
             {s.title}
@@ -87,9 +87,9 @@ export default function StudyPage() {
       </div>
 
       {/* コンテンツカード */}
-      <div className="bg-slate-800 rounded-2xl p-5 mb-6 border border-slate-700">
-        <h3 className="text-lg font-bold text-emerald-400 mb-4">{section.title}</h3>
-        <div className="text-slate-200 text-sm leading-relaxed whitespace-pre-line">
+      <div className="bg-white rounded-2xl p-5 mb-6 border border-slate-200 shadow-sm">
+        <h3 className="text-lg font-bold text-emerald-600 mb-4">{section.title}</h3>
+        <div className="text-slate-700 text-sm leading-relaxed whitespace-pre-line">
           {section.content}
         </div>
       </div>
@@ -99,14 +99,14 @@ export default function StudyPage() {
         {activeSection > 0 && (
           <button
             onClick={() => { setActiveSection(prev => prev - 1); window.scrollTo(0, 0) }}
-            className="flex-1 py-3 rounded-xl border border-slate-700 text-slate-300 font-medium hover:bg-slate-800 transition-colors"
+            className="flex-1 py-3 rounded-xl border border-slate-200 text-slate-600 font-medium hover:bg-slate-100 transition-colors shadow-sm"
           >
             ← 前へ
           </button>
         )}
         <button
           onClick={handleNext}
-          className="flex-1 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold transition-colors active:scale-95"
+          className="flex-1 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold transition-colors active:scale-95 shadow-md"
         >
           {isLast ? 'クイズに挑戦！ →' : '次へ →'}
         </button>

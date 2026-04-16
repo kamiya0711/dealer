@@ -15,18 +15,18 @@ export default function Layout({ children }) {
       ]
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: '#0f172a' }}>
+    <div className="min-h-screen flex flex-col" style={{ background: '#f1f5f9' }}>
       {/* ヘッダー */}
-      <header className="sticky top-0 z-50 px-4 py-3 flex items-center justify-between border-b border-slate-700" style={{ background: '#0f172a' }}>
-        <button onClick={() => navigate(user?.isInstructor ? '/instructor' : '/study')} className="font-bold text-lg text-emerald-400">
+      <header className="sticky top-0 z-50 px-4 py-3 flex items-center justify-between border-b border-slate-200 bg-white shadow-sm">
+        <button onClick={() => navigate(user?.isInstructor ? '/instructor' : '/study')} className="font-bold text-lg text-emerald-600">
           🃏 ディーラー研修
         </button>
         {user && (
           <div className="flex items-center gap-3">
-            <span className="text-sm text-slate-400">{user.name}</span>
+            <span className="text-sm text-slate-500">{user.name}</span>
             <button
               onClick={() => { logout(); navigate('/') }}
-              className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
+              className="text-xs text-slate-400 hover:text-slate-600 transition-colors"
             >
               退出
             </button>
@@ -41,7 +41,7 @@ export default function Layout({ children }) {
 
       {/* ボトムナビ */}
       {user && (
-        <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-slate-700" style={{ background: '#0f172a' }}>
+        <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-slate-200 bg-white shadow-lg">
           <div className="flex">
             {navItems.map(item => (
               <button
@@ -49,8 +49,8 @@ export default function Layout({ children }) {
                 onClick={() => navigate(item.path)}
                 className={`flex-1 flex flex-col items-center py-3 gap-1 text-xs transition-colors ${
                   location.pathname.startsWith(item.path)
-                    ? 'text-emerald-400'
-                    : 'text-slate-500 hover:text-slate-300'
+                    ? 'text-emerald-600'
+                    : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
                 <span className="text-xl">{item.icon}</span>
