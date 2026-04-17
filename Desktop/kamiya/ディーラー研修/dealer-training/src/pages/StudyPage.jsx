@@ -7,6 +7,7 @@ import { razzStudy } from '../data/razz'
 import { tripleDraw27Study } from '../data/triple_draw_27'
 import { tripleDrawA5Study } from '../data/triple_draw_a5'
 import { badugiStudy } from '../data/badugi'
+import { nlStudy, plStudy, flStudy } from '../data/bet_structures'
 import { markStudyDone } from '../lib/progress'
 
 const STUDY_DATA = {
@@ -16,6 +17,9 @@ const STUDY_DATA = {
   triple_draw_27: tripleDraw27Study,
   triple_draw_a5: tripleDrawA5Study,
   badugi: badugiStudy,
+  nl: nlStudy,
+  pl: plStudy,
+  fl: flStudy,
 }
 
 export default function StudyPage() {

@@ -7,6 +7,7 @@ import { razzQuiz } from '../data/razz'
 import { tripleDraw27Quiz } from '../data/triple_draw_27'
 import { tripleDrawA5Quiz } from '../data/triple_draw_a5'
 import { badugiQuiz } from '../data/badugi'
+import { nlQuiz, plQuiz, flQuiz } from '../data/bet_structures'
 import { saveQuizResult } from '../lib/progress'
 
 const QUIZ_DATA = {
@@ -16,6 +17,9 @@ const QUIZ_DATA = {
   triple_draw_27: tripleDraw27Quiz,
   triple_draw_a5: tripleDrawA5Quiz,
   badugi: badugiQuiz,
+  nl: nlQuiz,
+  pl: plQuiz,
+  fl: flQuiz,
 }
 
 const LEVEL_META = {

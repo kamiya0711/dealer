@@ -13,7 +13,7 @@ export default function QuizList() {
   const navigate = useNavigate()
   const { user } = useUser()
   const progress = getProgress(user?.name)
-  const categoryOrder = ['community', 'stud', 'draw', 'hybrid', 'mixed']
+  const categoryOrder = ['bet_structure', 'community', 'stud', 'draw', 'hybrid', 'mixed']
 
   return (
     <div className="px-4 py-6 max-w-lg mx-auto">
@@ -39,11 +39,16 @@ export default function QuizList() {
                   >
                     {/* ゲーム名 */}
                     <div className="px-4 pt-3 pb-2 flex items-center gap-2">
-                      <span className={`font-medium ${game.available ? 'text-slate-800' : 'text-slate-400'}`}>
-                        {game.name}
-                      </span>
+                      <div className="flex-1 min-w-0">
+                        <span className={`font-medium block ${game.available ? 'text-slate-800' : 'text-slate-400'}`}>
+                          {game.name}
+                        </span>
+                        {game.nameEn && (
+                          <span className="text-xs text-slate-400">{game.nameEn}</span>
+                        )}
+                      </div>
                       {!game.available && (
-                        <span className="text-xs text-slate-400 ml-auto">準備中</span>
+                        <span className="text-xs text-slate-400 ml-auto flex-shrink-0">準備中</span>
                       )}
                     </div>
 

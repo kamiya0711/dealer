@@ -8,7 +8,7 @@ export default function StudyList() {
   const { user } = useUser()
   const progress = getProgress(user?.name)
 
-  const categoryOrder = ['community', 'stud', 'draw', 'hybrid', 'mixed']
+  const categoryOrder = ['bet_structure', 'community', 'stud', 'draw', 'hybrid', 'mixed']
 
   return (
     <div className="px-4 py-6 max-w-lg mx-auto">
@@ -41,14 +41,19 @@ export default function StudyList() {
                     }`}>
                       {studyDone ? '✓' : '○'}
                     </span>
-                    <span className={`font-medium ${game.available ? 'text-slate-800' : 'text-slate-400'}`}>
-                      {game.name}
-                    </span>
+                    <div className="flex-1 min-w-0">
+                      <span className={`font-medium block ${game.available ? 'text-slate-800' : 'text-slate-400'}`}>
+                        {game.name}
+                      </span>
+                      {game.nameEn && (
+                        <span className="text-xs text-slate-400">{game.nameEn}</span>
+                      )}
+                    </div>
                     {!game.available && (
-                      <span className="ml-auto text-xs text-slate-400">準備中</span>
+                      <span className="ml-auto text-xs text-slate-400 flex-shrink-0">準備中</span>
                     )}
                     {game.available && (
-                      <span className="ml-auto text-slate-400">›</span>
+                      <span className="ml-auto text-slate-400 flex-shrink-0">›</span>
                     )}
                   </button>
                 )
