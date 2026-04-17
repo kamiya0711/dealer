@@ -606,9 +606,9 @@ export const tripleDrawA5Quiz = {
         {
           id: 'tda5_b35',
           type: 'truefalse',
-          question: 'A-5トリプルドローのドローラウンドでは、ディーラーは右回りにカードを配る。',
+          question: 'A-5トリプルドローのドローラウンドでは、ディーラーは反時計回りにカードを配る。',
           answer: false,
-          explanation: 'ディーラーはデッキから左回り（時計回り）に配ります。これはポーカー全般に共通するルールです。'
+          explanation: 'ディーラーは時計回りに配ります。これはポーカー全般に共通するルールです。'
         },
         {
           id: 'tda5_b36',
