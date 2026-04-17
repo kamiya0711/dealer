@@ -2,10 +2,20 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 import { holdemStudy } from '../data/holdem'
+import { omahaStudy } from '../data/omaha'
+import { razzStudy } from '../data/razz'
+import { tripleDraw27Study } from '../data/triple_draw_27'
+import { tripleDrawA5Study } from '../data/triple_draw_a5'
+import { badugiStudy } from '../data/badugi'
 import { markStudyDone } from '../lib/progress'
 
 const STUDY_DATA = {
   holdem: holdemStudy,
+  omaha: omahaStudy,
+  razz: razzStudy,
+  triple_draw_27: tripleDraw27Study,
+  triple_draw_a5: tripleDrawA5Study,
+  badugi: badugiStudy,
 }
 
 export default function StudyPage() {

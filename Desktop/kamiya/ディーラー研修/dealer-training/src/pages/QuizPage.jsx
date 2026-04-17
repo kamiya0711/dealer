@@ -2,10 +2,20 @@ import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 import { holdemQuiz } from '../data/holdem'
+import { omahaQuiz } from '../data/omaha'
+import { razzQuiz } from '../data/razz'
+import { tripleDraw27Quiz } from '../data/triple_draw_27'
+import { tripleDrawA5Quiz } from '../data/triple_draw_a5'
+import { badugiQuiz } from '../data/badugi'
 import { saveQuizResult } from '../lib/progress'
 
 const QUIZ_DATA = {
   holdem: holdemQuiz,
+  omaha: omahaQuiz,
+  razz: razzQuiz,
+  triple_draw_27: tripleDraw27Quiz,
+  triple_draw_a5: tripleDrawA5Quiz,
+  badugi: badugiQuiz,
 }
 
 const LEVEL_META = {
