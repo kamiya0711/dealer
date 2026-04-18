@@ -10,6 +10,8 @@ import { badugiQuiz } from '../data/badugi'
 import { nlQuiz, plQuiz, flQuiz } from '../data/bet_structures'
 import { omahaHiloQuiz } from '../data/omaha_hilo'
 import { pineappleQuiz, crazyPineappleQuiz } from '../data/pineapple'
+import { studHiloQuiz, fiveDrawQuiz } from '../data/stud_variants'
+import { studQuiz, fiveStudQuiz } from '../data/stud'
 import { saveQuizResult } from '../lib/progress'
 
 const QUIZ_DATA = {
@@ -18,6 +20,10 @@ const QUIZ_DATA = {
   omaha_hilo: omahaHiloQuiz,
   pineapple: pineappleQuiz,
   crazy_pineapple: crazyPineappleQuiz,
+  stud: studQuiz,
+  stud_hilo: studHiloQuiz,
+  five_stud: fiveStudQuiz,
+  five_draw: fiveDrawQuiz,
   razz: razzQuiz,
   triple_draw_27: tripleDraw27Quiz,
   triple_draw_a5: tripleDrawA5Quiz,

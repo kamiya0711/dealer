@@ -10,6 +10,8 @@ import { badugiStudy } from '../data/badugi'
 import { nlStudy, plStudy, flStudy } from '../data/bet_structures'
 import { omahaHiloStudy } from '../data/omaha_hilo'
 import { pineappleStudy, crazyPineappleStudy } from '../data/pineapple'
+import { studHiloStudy, fiveDrawStudy } from '../data/stud_variants'
+import { studStudy, fiveStudStudy } from '../data/stud'
 import { markStudyDone } from '../lib/progress'
 
 const STUDY_DATA = {
@@ -18,6 +20,10 @@ const STUDY_DATA = {
   omaha_hilo: omahaHiloStudy,
   pineapple: pineappleStudy,
   crazy_pineapple: crazyPineappleStudy,
+  stud: studStudy,
+  stud_hilo: studHiloStudy,
+  five_stud: fiveStudStudy,
+  five_draw: fiveDrawStudy,
   razz: razzStudy,
   triple_draw_27: tripleDraw27Study,
   triple_draw_a5: tripleDrawA5Study,
