@@ -13,6 +13,7 @@ import { pineappleQuiz, crazyPineappleQuiz } from '../data/pineapple'
 import { studHiloQuiz, fiveDrawQuiz } from '../data/stud_variants'
 import { studQuiz, fiveStudQuiz } from '../data/stud'
 import { saveQuizResult } from '../lib/progress'
+import { getGame } from '../data/games'
 
 const QUIZ_DATA = {
   holdem: holdemQuiz,
@@ -107,12 +108,15 @@ export default function QuizPage() {
     const secs = elapsedSec % 60
     const timeStr = mins > 0 ? `${mins}分${secs}秒` : `${secs}秒`
 
+    const gameName = getGame(gameId)?.name ?? gameId
+    const appUrl = 'https://dealer-training-kamiya.vercel.app'
     const shareText = [
       `【ポーカーディーラー研修】`,
-      `${quiz.name} ${meta.label}クイズ`,
+      `${gameName} ${meta.label}クイズ`,
       `${finalScore}/${total}問正解（${pct}%）${pct >= 90 ? '🎉' : pct >= 70 ? '👍' : '💪'}`,
       `⏱ タイム：${timeStr}`,
       `#ポーカーディーラー #ポーカー`,
+      appUrl,
     ].join('\n')
     const shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}`
 
