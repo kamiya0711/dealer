@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 import { holdemQuiz } from '../data/holdem'
@@ -60,6 +60,8 @@ export default function QuizPage() {
   const [answered, setAnswered] = useState(false)
   const [results, setResults] = useState([])
   const [finished, setFinished] = useState(false)
+  const [elapsedSec, setElapsedSec] = useState(0)
+  const startTime = useRef(Date.now())
 
   if (!quiz || !quiz.levels[level]) {
     return (
@@ -86,6 +88,7 @@ export default function QuizPage() {
       const finalScore = newResults.filter(r => r.correct).length
       saveQuizResult(user.name, gameId, level, finalScore, total)
       setResults(newResults)
+      setElapsedSec(Math.floor((Date.now() - startTime.current) / 1000))
       setFinished(true)
     } else {
       setResults(newResults)
@@ -100,6 +103,19 @@ export default function QuizPage() {
     const finalScore = results.filter(r => r.correct).length
     const pct = Math.round(finalScore / total * 100)
     const pass = pct >= 80
+    const mins = Math.floor(elapsedSec / 60)
+    const secs = elapsedSec % 60
+    const timeStr = mins > 0 ? `${mins}分${secs}秒` : `${secs}秒`
+
+    const shareText = [
+      `【ポーカーディーラー研修】`,
+      `${quiz.name} ${meta.label}クイズ`,
+      `${finalScore}/${total}問正解（${pct}%）${pct >= 90 ? '🎉' : pct >= 70 ? '👍' : '💪'}`,
+      `⏱ タイム：${timeStr}`,
+      `#ポーカーディーラー #ポーカー`,
+    ].join('\n')
+    const shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}`
+
     return (
       <div className="max-w-lg mx-auto px-4 py-10 text-center">
         <div className="text-6xl mb-4">{pct >= 90 ? '🎉' : pct >= 70 ? '👍' : '💪'}</div>
@@ -116,6 +132,7 @@ export default function QuizPage() {
           </div>
           <div className={`text-lg font-bold mt-1 ${pass ? meta.color : 'text-slate-400'}`}>{pct}%</div>
           {pass && <div className="text-sm text-slate-500 mt-1">合格！（80%以上）</div>}
+          <div className="text-sm text-slate-400 mt-1">⏱ {timeStr}</div>
         </div>
 
         {/* 正誤詳細 */}
@@ -137,9 +154,20 @@ export default function QuizPage() {
           ))}
         </div>
 
+        {/* Xシェアボタン */}
+        <a
+          href={shareUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-black text-white font-bold mb-3 hover:opacity-80 transition-opacity shadow-md"
+        >
+          <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          結果をポストする
+        </a>
+
         <div className="flex gap-3">
           <button
-            onClick={() => { setQuestions(pickQuestions()); setCurrent(0); setSelected(null); setAnswered(false); setResults([]); setFinished(false) }}
+            onClick={() => { startTime.current = Date.now(); setQuestions(pickQuestions()); setCurrent(0); setSelected(null); setAnswered(false); setResults([]); setFinished(false) }}
             className="flex-1 py-3 rounded-xl border border-slate-200 text-slate-600 font-medium hover:bg-slate-100 transition-colors shadow-sm"
           >
             もう一度
