@@ -9,12 +9,15 @@ import { tripleDrawA5Study } from '../data/triple_draw_a5'
 import { badugiStudy } from '../data/badugi'
 import { nlStudy, plStudy, flStudy } from '../data/bet_structures'
 import { omahaHiloStudy } from '../data/omaha_hilo'
+import { pineappleStudy, crazyPineappleStudy } from '../data/pineapple'
 import { markStudyDone } from '../lib/progress'
 
 const STUDY_DATA = {
   holdem: holdemStudy,
   omaha: omahaStudy,
   omaha_hilo: omahaHiloStudy,
+  pineapple: pineappleStudy,
+  crazy_pineapple: crazyPineappleStudy,
   razz: razzStudy,
   triple_draw_27: tripleDraw27Study,
   triple_draw_a5: tripleDrawA5Study,

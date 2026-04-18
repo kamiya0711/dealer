@@ -9,12 +9,15 @@ import { tripleDrawA5Quiz } from '../data/triple_draw_a5'
 import { badugiQuiz } from '../data/badugi'
 import { nlQuiz, plQuiz, flQuiz } from '../data/bet_structures'
 import { omahaHiloQuiz } from '../data/omaha_hilo'
+import { pineappleQuiz, crazyPineappleQuiz } from '../data/pineapple'
 import { saveQuizResult } from '../lib/progress'
 
 const QUIZ_DATA = {
   holdem: holdemQuiz,
   omaha: omahaQuiz,
   omaha_hilo: omahaHiloQuiz,
+  pineapple: pineappleQuiz,
+  crazy_pineapple: crazyPineappleQuiz,
   razz: razzQuiz,
   triple_draw_27: tripleDraw27Quiz,
   triple_draw_a5: tripleDrawA5Quiz,

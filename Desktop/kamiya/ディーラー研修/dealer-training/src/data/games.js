@@ -11,8 +11,8 @@ export const GAMES = [
   // フェーズ2（準備中）
   { id: 'omaha',          name: 'オマハ',                 nameEn: 'Omaha',                  category: 'community', phase: 2, available: true },
   { id: 'omaha_hilo',     name: 'オマハハイロー',         nameEn: 'Omaha Hi-Lo',            category: 'community', phase: 2, available: true },
-  { id: 'pineapple',      name: 'パイナップル',           nameEn: 'Pineapple',              category: 'community', phase: 2, available: false },
-  { id: 'crazy_pineapple',name: 'クレイジーパイナップル', nameEn: 'Crazy Pineapple',        category: 'community', phase: 2, available: false },
+  { id: 'pineapple',      name: 'パイナップル',           nameEn: 'Pineapple',              category: 'community', phase: 2, available: true },
+  { id: 'crazy_pineapple',name: 'クレイジーパイナップル', nameEn: 'Crazy Pineapple',        category: 'community', phase: 2, available: true },
   { id: 'stud',           name: 'セブンカードスタッド',   nameEn: '7-Card Stud',            category: 'stud',      phase: 2, available: false },
   { id: 'stud_hilo',      name: 'スタッドハイロー',       nameEn: 'Stud Hi-Lo',             category: 'stud',      phase: 2, available: false },
   { id: 'razz',           name: 'ラズ',                   nameEn: 'Razz',                   category: 'stud',      phase: 2, available: true },
