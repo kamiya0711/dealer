@@ -109,7 +109,7 @@ export default function QuizPage() {
     const timeStr = mins > 0 ? `${mins}分${secs}秒` : `${secs}秒`
 
     const gameName = getGame(gameId)?.name ?? gameId
-    const appUrl = 'https://dealer-training-kamiya.vercel.app'
+    const appUrl = 'https://dealer-eta-henna.vercel.app'
     const shareText = [
       `【ポーカーディーラー研修】`,
       `${gameName} ${meta.label}クイズ`,
