@@ -35,7 +35,7 @@ export default function RankingPage() {
   const { user } = useUser()
   const [rankings, setRankings] = useState([])
   const [loading, setLoading] = useState(true)
-  const [gameFilter, setGameFilter] = useState('all')
+  const [gameFilter, setGameFilter] = useState('random')
   const [levelFilter, setLevelFilter] = useState('all')
 
   useEffect(() => {
@@ -102,6 +102,7 @@ export default function RankingPage() {
           className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:border-emerald-400"
         >
           <option value="all">全ゲーム</option>
+          <option value="random">🎲 全問ランダム</option>
           {Object.entries(GAME_LABELS).map(([id, label]) => (
             <option key={id} value={id}>{label}</option>
           ))}
