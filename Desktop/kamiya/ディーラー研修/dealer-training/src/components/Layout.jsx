@@ -11,6 +11,7 @@ export default function Layout({ children }) {
     : [
         { path: '/study', label: '教科書', icon: '📖' },
         { path: '/quiz', label: 'クイズ', icon: '✏️' },
+        { path: '/ranking', label: 'ランキング', icon: '🏆' },
         { path: '/progress', label: '進捗', icon: '📈' },
       ]
 

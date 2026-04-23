@@ -8,6 +8,8 @@ import QuizList from './pages/QuizList'
 import QuizPage from './pages/QuizPage'
 import ProgressPage from './pages/ProgressPage'
 import InstructorPage from './pages/InstructorPage'
+import RankingPage from './pages/RankingPage'
+import RandomQuizPage from './pages/RandomQuizPage'
 
 function RequireAuth({ children }) {
   const { user } = useUser()
@@ -32,6 +34,8 @@ function AppRoutes() {
         <Route path="/quiz" element={<RequireAuth><QuizList /></RequireAuth>} />
         <Route path="/quiz/:gameId/:level" element={<RequireAuth><QuizPage /></RequireAuth>} />
         <Route path="/progress" element={<RequireAuth><ProgressPage /></RequireAuth>} />
+        <Route path="/ranking" element={<RequireAuth><RankingPage /></RequireAuth>} />
+        <Route path="/quiz/random" element={<RequireAuth><RandomQuizPage /></RequireAuth>} />
         <Route path="/instructor" element={<RequireInstructor><InstructorPage /></RequireInstructor>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -18,7 +18,16 @@ export default function QuizList() {
   return (
     <div className="px-4 py-6 max-w-lg mx-auto">
       <h2 className="text-2xl font-bold text-slate-800 mb-1">クイズ</h2>
-      <p className="text-slate-500 text-sm mb-6">難易度を選んで挑戦しよう</p>
+      <p className="text-slate-500 text-sm mb-4">難易度を選んで挑戦しよう</p>
+
+      {/* 全問ランダムボタン */}
+      <button
+        onClick={() => navigate('/quiz/random')}
+        className="w-full mb-6 py-4 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold text-lg shadow-md hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2"
+      >
+        🎲 全問ランダム
+        <span className="text-sm font-normal opacity-80">全ゲーム×全レベルから20問</span>
+      </button>
 
       {categoryOrder.map(cat => {
         const games = GAMES.filter(g => g.category === cat)
