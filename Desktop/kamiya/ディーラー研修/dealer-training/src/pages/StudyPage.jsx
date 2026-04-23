@@ -13,6 +13,7 @@ import { pineappleStudy, crazyPineappleStudy } from '../data/pineapple'
 import { studHiloStudy, fiveDrawStudy } from '../data/stud_variants'
 import { studStudy, fiveStudStudy } from '../data/stud'
 import { markStudyDone } from '../lib/progress'
+import { supabase } from '../lib/supabase'
 
 const STUDY_DATA = {
   holdem: holdemStudy,
@@ -59,6 +60,7 @@ export default function StudyPage() {
   const handleNext = () => {
     if (isLast) {
       markStudyDone(user.name, gameId)
+      supabase.from('study_progress').insert({ user_name: user.name, game_id: gameId })
       navigate(`/quiz/${gameId}`)
     } else {
       setActiveSection(prev => prev + 1)
